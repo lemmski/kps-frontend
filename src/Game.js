@@ -17,7 +17,7 @@ export default function Game() {
                     } else if (result === 1) {
                         return setResult('You won! Computer chose stone.')
                     } else if (result === 2) {
-                        return setResult('You lost! Computer chose scisscors.')
+                        return setResult('You lost! Computer chose scissors.')
                     }
                     break;
                 case 'stone':
