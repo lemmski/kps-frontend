@@ -48,7 +48,7 @@ export default function Game() {
         }
         if (selection) {
             sendMove();
-            setTimeout(() => setDisplayResult(true), 1000)
+            setDisplayResult(true)
         }
         setSelection('')
     }, [selection]);
@@ -58,6 +58,10 @@ export default function Game() {
         <button onClick={() => setSelection('stone')}>Rock</button>
         <button onClick={() => setSelection('paper')}>Paper</button>
         <button onClick={() => setSelection('scissors')}>Scissors</button>
-        {<Grow in={displayResult}>{displayResult && <p>{gameResult}</p>}</Grow>}
-    </main>
+        {<Grow
+        in={displayResult}
+        style={{ transformOrigin: '0 0 -100' }}
+        {...(displayResult ? { timeout: 1000 } : {})}
+    >{displayResult && <p>{gameResult}</p>}</Grow>}
+</main>
 }
