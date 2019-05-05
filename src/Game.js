@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Grow from '@material-ui/core/Collapse';
 
 export default function Game() {
+    const [displayResult, setDisplayResult] = useState(false);
     const [selection, setSelection] = useState('');
     const [gameResult, setResult] = useState(null);
 
     useEffect(() => {
         const sendMove = async () => {
+            setDisplayResult(false)
             const result = await fetch(
                 `http://localhost:4000/kps?select=${selection}`,
             ).then(res => res.json());
@@ -45,6 +48,7 @@ export default function Game() {
         }
         if (selection) {
             sendMove();
+            setTimeout(() => setDisplayResult(true), 1000)
         }
         setSelection('')
     }, [selection]);
@@ -54,6 +58,6 @@ export default function Game() {
         <button onClick={() => setSelection('stone')}>Rock</button>
         <button onClick={() => setSelection('paper')}>Paper</button>
         <button onClick={() => setSelection('scissors')}>Scissors</button>
-        {gameResult && <p>{gameResult}</p>}
+        {<Grow in={displayResult}>{displayResult && <p>{gameResult}</p>}</Grow>}
     </main>
 }
